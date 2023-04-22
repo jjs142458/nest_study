@@ -9,6 +9,8 @@ import {
   Get,
   UseFilters,
   HttpException,
+  ParseIntPipe,
+  Param,
 } from '@nestjs/common';
 
 @Controller('cats')
@@ -18,12 +20,12 @@ export class CatsController {
 
   @Get()
   getAllCat() {
-    throw new HttpException('api broken', 401);
     return 'all cat';
   }
 
   @Get(':id')
-  getOneCat() {
+  getOneCat(@Param('id', ParseIntPipe) param: number) {
+    console.log(typeof param);
     return 'one cat';
   }
   @Post()
