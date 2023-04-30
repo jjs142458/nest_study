@@ -11,8 +11,10 @@ import {
   ParseIntPipe,
   Param,
   UseInterceptors,
+  Body,
 } from '@nestjs/common';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
+import { CatRequestDto } from './dto/cat.request.dto';
 
 @Controller('cats')
 @UseInterceptors(SuccessInterceptor)
@@ -23,5 +25,11 @@ export class CatsController {
   @Get()
   getCurrentCat() {
     return 'current cat';
+  }
+
+  @Post()
+  async signUp(@Body() body: CatRequestDto) {
+    console.log(body);
+    return await this.CatsService.signUp(body);
   }
 }
